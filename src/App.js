@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TodoInput from './todo/todoInput'
+import TodoItem from './todo/todoItem'
 
 class App extends Component {
   constructor(){
@@ -34,7 +36,11 @@ class App extends Component {
 
   render() {
     let todos = this.state.todoList.map((item,index)=>{
-      return <li key={item.id}>{item.id} - {item.msg}</li>
+      return (
+          <li key={item.id}>
+            <TodoItem todo={item}></TodoItem>
+          </li>
+      )
     })
 
 
@@ -48,12 +54,12 @@ class App extends Component {
           {this.state.title}
         </div>
         <div className="input-box">
-          <input type="text" value={this.state.newTodo}/>
+          <TodoInput newTodo={this.state.newTodo}></TodoInput>
         </div>
         <h4>待办列表</h4>
-        <ul>
+        <ol>
           {todos}
-        </ul>
+        </ol>
       </div>
     );
   }
