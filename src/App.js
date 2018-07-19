@@ -8,6 +8,7 @@ import TodoInput from './todo/todoInput';
 import TodoItem from './todo/todoItem';
 import Footer from './components/Footer/footer'
 import Header from './components/Header/header'
+import { save , load } from './localStore';
 
 class App extends Component {
   constructor(){
@@ -15,26 +16,7 @@ class App extends Component {
 
     this.state = {
       newTodo : '',
-      todoList : [
-        {
-          id: 1,
-          msg : '我的第一个待办',
-          isDelete : false,
-          status : 'complete'
-        },
-        {
-          id: 2,
-          msg : '我的第二个待办',
-          isDelete : true,
-          status : 'complete'
-        },
-        {
-          id: 3,
-          msg : '我的第三个待办',
-          isDelete : true,
-          status : 'complete'
-        }
-      ]
+      todoList : load('todoList')
     }
   }
 
@@ -73,7 +55,7 @@ class App extends Component {
   }
   addTodo(event){
     this.state.todoList.push({
-      id: this.state.todoList.length + 1,
+      id: this.state.todoList.filter((item) => item.isDelete === false).length + 1,
       msg: event.target.value,
       status: null,
       isDelete: false
@@ -82,6 +64,8 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
+    console.log('更新数据后查询')
+    save('todoList',this.state.todoList)
   }
   changeTitle(event){
     this.setState({
@@ -99,6 +83,7 @@ class App extends Component {
     console.log('app 删除')
     todo.isDelete = true;
     this.setState(this.state);
+    save('todoList',this.state.todoList)
   }
 }
 
