@@ -54,7 +54,7 @@ class App extends Component {
         <main>
           <div className="todoList">
             <div className="input-box">
-              <TodoInput newTodo={this.state.newTodo}></TodoInput>
+              <TodoInput newTodo={this.state.newTodo} onSubmit={this.addTodo.bind(this)} onChange={this.changeTitle.bind(this)}></TodoInput>
               <i className="icon iconfont icon-icon_add"></i>
             </div>
             <h4>待办列表</h4>
@@ -69,6 +69,28 @@ class App extends Component {
       </div>
     );
   }
+  addTodo(event){
+    this.state.todoList.push({
+      id: this.state.todoList.length + 1,
+      msg: event.target.value,
+      hasDone: null,
+      isDelete: false
+    })
+    this.setState({
+      newTodo: '',
+      todoList: this.state.todoList
+    })
+  }
+  changeTitle(event){
+    this.setState({
+      newTodo: event.target.value,
+      todoList: this.state.todoList
+    })
+  }
 }
 
 export default App;
+
+function idMaker(){
+  return parseInt(Math.random() * 10000);
+}
