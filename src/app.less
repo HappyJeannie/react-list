@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  //animation: App-logo-spin infinite 20s linear;
   height: 50px;
   margin-top: 5px;
 }
@@ -128,17 +128,22 @@ main{
           &::before{
             display: none;
           }
-          &.isdone{
-            &::before{
-              display: block;
-            }
-          }
         }
         i.icon-icon_delete{
           float: right;
           cursor: pointer;
         }
-        
+        div.isdone{
+          span{
+            text-decoration: line-through;
+            color: #666
+          }
+          i.icon-icon_right_fill{
+            &::before{
+              display: block;
+            }
+          }
+        }
       }
     }
   }

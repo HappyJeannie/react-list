@@ -20,19 +20,19 @@ class App extends Component {
           id: 1,
           msg : '我的第一个待办',
           isDelete : false,
-          hasDone : false
+          status : 'complete'
         },
         {
           id: 2,
           msg : '我的第二个待办',
           isDelete : true,
-          hasDone : false
+          status : 'complete'
         },
         {
           id: 3,
           msg : '我的第三个待办',
           isDelete : true,
-          hasDone : false
+          status : 'complete'
         }
       ]
     }
@@ -42,7 +42,7 @@ class App extends Component {
     let todos = this.state.todoList.map((item,index)=>{
       return (
           <li key={item.id}>
-            <TodoItem todo={item}></TodoItem>
+            <TodoItem todo={item} onToggle={this.toggle.bind(this)}></TodoItem>
           </li>
       )
     })
@@ -73,7 +73,7 @@ class App extends Component {
     this.state.todoList.push({
       id: this.state.todoList.length + 1,
       msg: event.target.value,
-      hasDone: null,
+      status: null,
       isDelete: false
     })
     this.setState({
@@ -86,6 +86,12 @@ class App extends Component {
       newTodo: event.target.value,
       todoList: this.state.todoList
     })
+  }
+  toggle(e,todo){
+    console.log(e)
+    console.log(todo)
+    todo.status = todo.status === 'complete' ? '' : 'complete';
+    this.setState(this.state);
   }
 }
 

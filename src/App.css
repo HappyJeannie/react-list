@@ -2,7 +2,6 @@
   text-align: center;
 }
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
   height: 50px;
   margin-top: 5px;
 }
@@ -127,10 +126,14 @@ main .todoList ol li i.icon-icon_right_fill {
 main .todoList ol li i.icon-icon_right_fill::before {
   display: none;
 }
-main .todoList ol li i.icon-icon_right_fill.isdone::before {
-  display: block;
-}
 main .todoList ol li i.icon-icon_delete {
   float: right;
   cursor: pointer;
+}
+main .todoList ol li div.isdone span {
+  text-decoration: line-through;
+  color: #666;
+}
+main .todoList ol li div.isdone i.icon-icon_right_fill::before {
+  display: block;
 }
