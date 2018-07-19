@@ -8,6 +8,7 @@ import TodoInput from './todo/todoInput';
 import TodoItem from './todo/todoItem';
 import Footer from './components/Footer/footer'
 import Header from './components/Header/header'
+import Toast from './components/Toast/toast'
 import { save , load } from './localStore';
 
 class App extends Component {
@@ -16,7 +17,8 @@ class App extends Component {
 
     this.state = {
       newTodo : '',
-      todoList : load('todoList') || [{}]
+      todoList : load('todoList') || [{}],
+      tips:'123'
     }
   }
 
@@ -48,7 +50,7 @@ class App extends Component {
           </div>
           
         </main>
-        
+        <Toast msg={this.state.tips}></Toast>
         <Footer></Footer>
       </div>
     );
