@@ -16,7 +16,7 @@ class App extends Component {
 
     this.state = {
       newTodo : '',
-      todoList : load('todoList')
+      todoList : load('todoList') || [{}]
     }
   }
 
@@ -53,6 +53,9 @@ class App extends Component {
       </div>
     );
   }
+  componentDidUpdate(){
+    save('todoList',this.state.todoList)
+  }
   addTodo(event){
     this.state.todoList.push({
       id: this.state.todoList.filter((item) => item.isDelete === false).length + 1,
@@ -64,8 +67,7 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
-    console.log('更新数据后查询')
-    save('todoList',this.state.todoList)
+    
   }
   changeTitle(event){
     this.setState({
@@ -74,21 +76,14 @@ class App extends Component {
     })
   }
   toggle(e,todo){
-    console.log(e)
-    console.log(todo)
     todo.status = todo.status === 'complete' ? '' : 'complete';
     this.setState(this.state);
   }
   deleteItem(e,todo){
-    console.log('app 删除')
     todo.isDelete = true;
     this.setState(this.state);
-    save('todoList',this.state.todoList)
+    
   }
 }
 
 export default App;
-
-function idMaker(){
-  return parseInt(Math.random() * 10000);
-}
