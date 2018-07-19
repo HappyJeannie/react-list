@@ -39,10 +39,12 @@ class App extends Component {
   }
 
   render() {
-    let todos = this.state.todoList.map((item,index)=>{
+    let todos = this.state.todoList.filter(((item) => {
+      return item.isDelete === false
+    })).map((item,index)=>{
       return (
           <li key={item.id}>
-            <TodoItem todo={item} onToggle={this.toggle.bind(this)}></TodoItem>
+            <TodoItem todo={item} onToggle={this.toggle.bind(this)} onDelete={this.deleteItem.bind(this)}></TodoItem>
           </li>
       )
     })
@@ -91,6 +93,11 @@ class App extends Component {
     console.log(e)
     console.log(todo)
     todo.status = todo.status === 'complete' ? '' : 'complete';
+    this.setState(this.state);
+  }
+  deleteItem(e,todo){
+    console.log('app 删除')
+    todo.isDelete = true;
     this.setState(this.state);
   }
 }
