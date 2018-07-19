@@ -1,15 +1,19 @@
+import 'normalize.css';
+import './css/reset.css';
+import './css/iconfont.css';
+
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TodoInput from './todo/todoInput'
-import TodoItem from './todo/todoItem'
+import TodoInput from './todo/todoInput';
+import TodoItem from './todo/todoItem';
+import Footer from './components/Footer/footer'
+import Header from './components/Header/header'
 
 class App extends Component {
   constructor(){
     super()
 
     this.state = {
-      title : '测试标题',
       newTodo : '',
       todoList : [
         {
@@ -46,20 +50,22 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div className="title">
-          {this.state.title}
-        </div>
-        <div className="input-box">
-          <TodoInput newTodo={this.state.newTodo}></TodoInput>
-        </div>
-        <h4>待办列表</h4>
-        <ol>
-          {todos}
-        </ol>
+        <Header></Header>
+        <main>
+          <div className="todoList">
+            <div className="input-box">
+              <TodoInput newTodo={this.state.newTodo}></TodoInput>
+              <i className="icon iconfont icon-icon_add"></i>
+            </div>
+            <h4>待办列表</h4>
+            <ol>
+              {todos}
+            </ol>
+          </div>
+          
+        </main>
+        
+        <Footer></Footer>
       </div>
     );
   }
