@@ -5,7 +5,7 @@ import React , {Component} from 'react';
 class Toast extends Component{
   render(){
     return (
-      <div className="Toast">
+      <div className={this.props.ifShow?"active Toast" :"Toast"}>
         {this.props.msg}
       </div>
     )

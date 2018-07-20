@@ -18,7 +18,8 @@ class App extends Component {
     this.state = {
       newTodo : '',
       todoList : load('todoList') || [{}],
-      tips:'123'
+      tips:'123',
+      showToast:false
     }
   }
 
@@ -39,10 +40,9 @@ class App extends Component {
         <Header></Header>
         <main>
           <div className="todoList">
-            <div className="input-box">
-              <TodoInput newTodo={this.state.newTodo} onSubmit={this.addTodo.bind(this)} onChange={this.changeTitle.bind(this)}></TodoInput>
-              <i className="icon iconfont icon-icon_add"></i>
-            </div>
+            
+              <TodoInput newTodo={this.state.newTodo} onSubmit={this.addTodo.bind(this)} onChange={this.changeTitle.bind(this)} onToast={this.showToast.bind(this)}></TodoInput>
+            
             <h4>待办列表</h4>
             <ol>
               {todos}
@@ -50,7 +50,7 @@ class App extends Component {
           </div>
           
         </main>
-        <Toast msg={this.state.tips}></Toast>
+        <Toast msg={this.state.tips} ifShow={this.state.showToast}></Toast>
         <Footer></Footer>
       </div>
     );
@@ -58,10 +58,10 @@ class App extends Component {
   componentDidUpdate(){
     save('todoList',this.state.todoList)
   }
-  addTodo(event){
+  addTodo(msg){
     this.state.todoList.push({
       id: this.state.todoList.filter((item) => item.isDelete === false).length + 1,
-      msg: event.target.value,
+      msg: msg,
       status: null,
       isDelete: false
     })
@@ -85,6 +85,18 @@ class App extends Component {
     todo.isDelete = true;
     this.setState(this.state);
     
+  }
+  showToast(e,msg){
+    console.log('展示弹窗')
+    this.setState({
+      tips:msg,
+      showToast:true
+    })
+    setTimeout(()=>{
+      this.setState({
+        showToast:false
+      })
+    },1000)
   }
 }
 
